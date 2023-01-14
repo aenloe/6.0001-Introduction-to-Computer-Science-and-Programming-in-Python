@@ -23,7 +23,24 @@ def get_permutations(sequence):
     a different order than what is listed here.
     '''
 
-    pass #delete this line and replace with your code here
+    def recursive_loop(x):
+        #base case
+        if len(x) == 1:
+            return x
+        
+        else:
+            for e in x[:]:
+                modified_x = x[:]
+                modified_x.remove(e) 
+                x.append(e + recursive_loop(modified_x))
+                
+                
+            return x
+     
+    
+    #convert string type sequence to type list for recursive loop to process
+    input = [sequence]
+    recursive_loop(input)
 
 if __name__ == '__main__':
 #    #EXAMPLE
@@ -36,5 +53,9 @@ if __name__ == '__main__':
 #    to be three characters or fewer as you will have n! permutations for a 
 #    sequence of length n)
 
-    pass #delete this line and replace with your code here
+    example_input = 'abc'
+    print('Input:', example_input)
+    print('Expected output:' , '[some list of values]')
+    print('Actual Output:', get_permutations(example_input))
+    
 
