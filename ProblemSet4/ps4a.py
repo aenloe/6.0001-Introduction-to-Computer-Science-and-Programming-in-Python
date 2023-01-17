@@ -22,25 +22,33 @@ def get_permutations(sequence):
     Note: depending on your implementation, you may return the permutations in
     a different order than what is listed here.
     '''
+    def insertion(char: str, string: str) -> list:
 
-    def recursive_loop(x):
+        output = []
+        end = len(string) + 1
+
+        for index in range(0, end):
+            x = (string[0:index] + char + string[index:end])
+            output.append(x)
+
+        return output
+
+    def recursion(sequence: str) -> list:
         #base case
-        if len(x) == 1:
-            return x
-        
-        else:
-            for e in x[:]:
-                modified_x = x[:]
-                modified_x.remove(e) 
-                x.append(e + recursive_loop(modified_x))
-                
-                
-            return x
-     
-    
-    #convert string type sequence to type list for recursive loop to process
-    input = [sequence]
-    recursive_loop(input)
+        if len(sequence) == 1:
+            return sequence
+
+        #recursive step
+        result = []
+        sliced_end_char = sequence[-1]
+        recursive_returned_list = recursion(sequence[0:-1])
+
+        for element in recursive_returned_list:
+            result.extend(insertion(sliced_end_char, element))
+
+        return result
+
+    return recursion(sequence)
 
 if __name__ == '__main__':
 #    #EXAMPLE
